@@ -325,7 +325,7 @@ function entered() {
                 if (x > canvas.width - 150) {
                     if (rb1 > 0) {
                         rb1 = y
-                        if (y > canvas.height - 130) b2 = y - 130
+                        if (y > canvas.height - 130) rb1 = y - 130
                     }
                 }
             }
