@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PING PONG</title>
+    <link rel="icon" href="./favicon.png">
+</head>
+
+<body >
+    <style>
+        body{
+            /* background-image: url(./backnet.jpg); 
+            background-repeat: no-repeat;
+            background-size: cover; */
+            background-color: black;
+        }
+        #canvas {
+            border: 1px solid black;
+        }
+
+        #start-page {
+            color: white;
+            position: absolute;
+            top: 30%;
+            left: 45%;
+            font-family:cursive;
+        }
+
+        #game {
+            cursor: pointer;
+        }
+
+        #exit {
+            cursor: pointer;
+        }
+        #myVideo{
+            width: 100%;
+            z-index: -1;
+        }
+        #name-form{
+            color: 00000000;
+            display: none;
+            position: absolute;
+            left: 40%;
+            top: 30%; 
+            font-family:cursive;
+        }
+        #btn:hover{
+            background-color: #ffffff94;
+        }
+        #name-form label , input{
+            margin-bottom:20px ;
+            display: block;
+        }
+        input{
+            border-radius: 3px;
+            outline: 0;
+            border: none;
+        }
+        #playername {
+            font-size: 25px;
+        }
+        #playerLabel{
+            font-size: 25px;
+            text-align: center;
+            color: white;
+        }
+        #btn{
+            border-radius: 3px;
+            font-size: 20px;
+            position: relative;
+            left: 70px;
+            background-color: #ffffff59;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            color: white;
+        }
+        #playername2 {
+            font-size: 25px;
+        }
+        #playerLabel2{
+            font-size: 25px;
+            text-align: center;
+            color: white;
+        }
+        #list-of-options{
+            color: white;
+            font-size: 25px;
+            text-align: center;
+            display: none;
+            position: absolute;
+            top: 30%;
+            left: 42%;
+            font-family:cursive;
+        }
+        #computer{
+            cursor: pointer;
+            font-size: 30px;
+        }
+        #two-players{
+            cursor: pointer;
+            font-size: 30px;
+        }
+    </style>
+    <!-- <video autoplay muted loop id="myVideo">
+        <source src="./backspace.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+      </video> -->
+    <audio id="paddle">
+        <source src="./paddle.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+    <audio id="wall">
+        <source src="./wall.mp3" type="audio/mp3">
+    </audio>
+    <audio id="click">
+        <source src="./click.mp3" type="audio/mp3">
+    </audio>
+    <div id="start-page">
+        <h1 id="game" onclick="start()">START</h1>
+        <h2 id="exit" onclick="exit()" style="text-align: center;">EXIT</h2>
+    </div>
+
+    <div id="list-of-options">
+        <h1 onclick="computer()" id="computer">Computer</h1>
+        <h2 id="two-players" onclick="players()">Two Player</h2>
+    </div>
+
+    <div id="name-form">
+        <label for="playername" id="playerLabel">Enter Player One Name</label>
+        <input type="text" id="playername" value="Player 1" maxlength="6" minlength="3">
+        <label for="playername2" id="playerLabel2">Enter Player Two Name</label>
+        <input type="text" id="playername2" value="Player 2" maxlength="6" minlength="3">  
+        <button id="btn" onclick="entered()">ENTER TO GAME</button>
+        
+    </div>
+    <canvas id="canvas" height="" width=""></canvas>
+    <script src="./script.js"></script>
+</body>
+
+</html>
