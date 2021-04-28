@@ -17,14 +17,12 @@ function start() {
     options.style.display = "block"
 
 }
-computerBot = false
-twoplayer = false
+let playerandcomputerBot =  false // decide who is 
 
 // this function for one player vs bot 
 function computer() {
     press.play();
-    computerBot = true
-    twoplayer = false
+    playerandcomputerBot = true
     alert("Computer Selected")
     options.style.display = "none"
     alert("Player one Use to control W and S key for Paddle Down and Up")
@@ -33,8 +31,7 @@ function computer() {
 
 // this function for 2 players
 function players() {
-    computerandplayer = false
-    twoplayer - true
+    playerandcomputerBot = false
     press.play();
     options.style.display = "none"
     alert("Player One use W and S keys Player 2 use Up and down arrows")
@@ -45,54 +42,54 @@ function players() {
 function entered() {
 
     press.play();
-    playeronename = document.querySelector("#playername")
-    playertwoname = document.querySelector("#playername2")
+    var playeronename = document.querySelector("#playername")
+    var playertwoname = document.querySelector("#playername2")
 
-    loadgame = setTimeout(() => {
+    var loadgame = setTimeout(() => {
         var removecolor = document.querySelector("#start-page").style.color = "#00000000"
         document.getElementById("name-form").style.display = "none"
         var paddleSound = document.getElementById("paddle"); // paddle hiting sound
         var wallSound = document.getElementById("wall"); // wall hinting sound
-
-        var firstMovingStep; // this variable use to maintain the ball speed upto 10 hots
         var canvas = document.querySelector("#canvas");
         var ctx = canvas.getContext("2d")
         canvas.width = window.innerWidth - 30 // canvas width
         canvas.height = window.innerHeight - 20 // canvas height
-        var secondMovingStep; // this variable use to increase the ball speed 
-        var winnerName, winnerResult1 = false,winnerResult2 = false;
 
-        radius = 15
-        x = canvas.width / 2 // x axis
-        y = canvas.height / 2 // y axis
-        movingSpeed = 10  // initiol ball speed
-        dx = 3 //direction of x axix
-        dy = -2 //direction of y axis
-        batWidth = radius // bat width
-        batHeight = 130  // bat height
+        let firstMovingStep; // this variable use to maintain the ball speed upto 10 hotss
+        let secondMovingStep; // this variable use to increase the ball speed 
+        let winnerName, winnerResult = false,
+            winnerResult2 = false;
 
-        lb1 = canvas.height / 2 - 100 // lefe bat or left paddle
-        rb1 = canvas.height / 2 - 100//right bat or right paddle
-        var ballSpeed = 10
-        stopresult = true;
+        let radius = 15 // radius of ball
+        let x = canvas.width / 2 // x axis
+        let y = canvas.height / 2 // y axis
+        let movingSpeed = 10 // initiol ball speed
+        let dx = 3 //direction of x axix
+        let dy = -2 //direction of y axis
+        let batWidth = radius // bat width
+        let batHeight = 130 // bat height
 
-       
-        var pressedUp1 = false
-        var pressedDown1 = false
-        var rightbatpositon = canvas.width - 45
-        var pressedUp2 = false
-        var pressedDown2 = false
-        var speedcount = 10
-        var stopSpeed = true
-         //Left side paddle
-        var playerOneScore = 0 
-        var playerOneLoss = 3
+        var lb1 = canvas.height / 2 - 100 // lefe bat or left paddle
+        var rb1 = canvas.height / 2 - 100 //right bat or right paddle
+        let ballSpeed = 10
+
+
+        let pressedUp1 = false
+        let pressedDown1 = false
+        let rightbatpositon = canvas.width - 45
+        let pressedUp2 = false
+        let pressedDown2 = false
+        let speedcount = 10
+        let stopSpeed = true
+        //Left side paddle
+        let playerOneScore = 0
+        let playerOneLoss = 3
 
         //Right Side paddle
-        var playerTwoScore = 0
-        var playerTwoLoss = 3
+        let playerTwoScore = 0
+        let playerTwoLoss = 3
 
-        
+
         clearInterval(firstMovingStep)
 
         //When you click key or press key this condition will true
@@ -133,7 +130,7 @@ function entered() {
             ctx.fillText(`${playerTwoLoss}`, canvas.width / 2 - 100, 40)
             ctx.closePath()
         }
-          //Player two or computer Score how much score he got
+        //Player two or computer Score how much score he got
         function rightBatScore() {
             ctx.font = "30px Arial";
             ctx.fillStyle = "blue";
@@ -143,7 +140,7 @@ function entered() {
             ctx.closePath()
         }
 
-         //it will indicate player two OR computer chances how much chance he have 
+        //it will indicate player two OR computer chances how much chance he have 
         function rightBatChances() {
             ctx.font = "30px Arial";
             ctx.fillStyle = 'blue';
@@ -159,33 +156,25 @@ function entered() {
             ctx.font = "25px Arial";
             ctx.strokeRect(canvas.width / 2 - 250, canvas.height / 2 - 100, 500, 200);
             //player one result or score will display
-            if (winnerResult1) {
+            if (winnerResult) {
                 ctx.fillStyle = "green";
-                ctx.shadowColor="green"
+                ctx.shadowColor = "green"
                 ctx.fillText("GAME OVER", canvas.width / 2 - 90, canvas.height / 2 - 50)
                 ctx.fillText(`${winnerName}`, canvas.width / 2 - 150, canvas.height / 2);
                 ctx.fillText(`${playername.value} Score is: ${playerTwoScore}`, canvas.width / 2 - 150, canvas.height / 2 + 50);
                 ctx.closePath();
             }
-             //player two or computer result or score will display
-            if (winnerResult2) {
+            //player two or computer result or score will display
+            if (!winnerResult) {
                 ctx.fillStyle = "blue";
                 ctx.fillText("GAME OVER", canvas.width / 2 - 90, canvas.height / 2 - 50)
                 ctx.fillText(`${winnerName}`, canvas.width / 2 - 150, canvas.height / 2);
                 ctx.fillText(`${playertwoname.value} Score Is: ${playerOneScore}`, canvas.width / 2 - 150, canvas.height / 2 + 50);
                 ctx.closePath();
             }
-            //the score is equal or Tie this will show
-            if (!winnerResult1 && !winnerResult2) {
-                ctx.fillStyle = "yellow";
-                ctx.fillText("GAME OVER", canvas.width / 2 - 90, canvas.height / 2 - 50)
-                ctx.fillText("MATCH TIE", canvas.width / 2 - 80, canvas.height / 2);
-                ctx.fillText("Both Player Score Is: 0 ", canvas.width / 2 - 150, canvas.height / 2 + 50);
-                ctx.closePath();
-            }
             ctx.closePath()
         }
-        
+
         // middle of line in canvas game 
         function middleLine() {
             ctx.beginPath();
@@ -219,7 +208,7 @@ function entered() {
         }
 
         // right bat or right paddle creating and moving 
-        function rightbatmovementfunction(){
+        function rightbatmovementfunction() {
             ctx.beginPath();
             ctx.rect(rightbatpositon, rb1, batWidth, batHeight);
             ctx.fillStyle = "green"
@@ -228,7 +217,7 @@ function entered() {
             ctx.shadowColor = "blue";
             ctx.fillStyle = "blue"
             ctx.fill()
-            ctx.closePath()  
+            ctx.closePath()
         }
 
         //all the movements,calling the functions and executing the function 
@@ -241,18 +230,13 @@ function entered() {
             rightBatScore()
             rightBatChances()
             leftBatChances()
-
-
-            if (computerBot) {  // If bot computerbot true the bot will execute
-                rightbatmovementfunction()
-            } else {  //This step for two players If twoplayer true the two player code will execute
-                rightbatmovementfunction()
-                if (pressedUp2) 
+            rightbatmovementfunction()
+            if (!playerandcomputerBot) { // If bot playerandcomputerBot true the bot will execute
+                if (pressedUp2)
                     if (rb1 > 0) rb1 = rb1 - 5
                 if (pressedDown2)
                     if (rb1 < canvas.height - 130) rb1 = rb1 + 5
             }
-
             //Calculate the score and chances for first Player 
             if (x < radius + radius + 25) {
                 if (y >= lb1 && y <= lb1 + batHeight) {
@@ -274,8 +258,7 @@ function entered() {
                         clearInterval(secondMovingStep);
                         clearInterval(firstMovingStep);
                         ctx.clearRect(0, 0, canvas.width, canvas.height);
-                        winnerResult1 = false;
-                        winnerResult2 = true
+                        winnerResult = false;
                         endCard();
                     }
                 }
@@ -291,8 +274,7 @@ function entered() {
                     playerTwoScore++
                     x = canvas.width / 2
                     y = canvas.height / 2;
-                    winnerResult1 = true;
-                    winnerResult2 = false;
+                    winnerResult = true;
                     if (playerOneLoss == 0) {
                         winnerName = `${playeronename.value} Won The Match`;
                         clearInterval(secondMovingStep);
@@ -314,14 +296,14 @@ function entered() {
             x = x + dx
             y = y - dy
 
-
             //left side paddle up and down movements
-            if (pressedUp1) if (lb1 > 0) lb1 = lb1 - 5;    
-            if (pressedDown1) if (lb1 < canvas.height - 130) lb1 = lb1 + 5
-
+            if (pressedUp1)
+                if (lb1 > 0) lb1 = lb1 - 5;
+            if (pressedDown1)
+                if (lb1 < canvas.height - 130) lb1 = lb1 + 5
 
             //Computer BOT it will automatically move depending upon the ball movements
-            if (computerBot) {
+            if (playerandcomputerBot) {
                 if (x > canvas.width - 150) {
                     if (rb1 > 0) {
                         rb1 = y
@@ -329,9 +311,6 @@ function entered() {
                     }
                 }
             }
-
-            
-
         }
 
         firstMovingStep = setInterval(moving, movingSpeed) // calling moving function every 500 milisecond
