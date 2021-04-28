@@ -17,7 +17,7 @@ function start() {
     options.style.display = "block"
 
 }
-let playerandcomputerBot =  false // decide who is 
+let playerandcomputerBot = false // decide who is 
 
 // this function for one player vs bot 
 function computer() {
@@ -110,46 +110,6 @@ function entered() {
             // console.log(e)
         })
 
-        //Player one Score how much he got
-        function leftBatScore() {
-            ctx.font = "30px Arial";
-            ctx.fillStyle = 'green';
-            ctx.shadowBlur = 10;
-            ctx.shadowColor = "black";
-            ctx.fillText(`${playerTwoScore}`, canvas.width / 2 - 40, 40);
-            ctx.fillText(`${playeronename.value}`, canvas.width / 2 - 250, 40);
-            ctx.closePath()
-        }
-
-        //it will indicate player one chances how much chance he have 
-        function leftBatChances() {
-            ctx.font = "30px Arial";
-            ctx.fillStyle = "green";
-            ctx.shadowBlur = 10;
-            ctx.shadowColor = "black";
-            ctx.fillText(`${playerTwoLoss}`, canvas.width / 2 - 100, 40)
-            ctx.closePath()
-        }
-        //Player two or computer Score how much score he got
-        function rightBatScore() {
-            ctx.font = "30px Arial";
-            ctx.fillStyle = "blue";
-            ctx.shadowBlur = 10;
-            ctx.shadowColor = "black";
-            ctx.fillText(`${playerOneScore}`, canvas.width / 2 + 30, 40);
-            ctx.closePath()
-        }
-
-        //it will indicate player two OR computer chances how much chance he have 
-        function rightBatChances() {
-            ctx.font = "30px Arial";
-            ctx.fillStyle = 'blue';
-            ctx.shadowBlur = 10;
-            ctx.shadowColor = "black";
-            ctx.fillText(`${playerOneLoss}`, canvas.width / 2 + 80, 40);
-            ctx.fillText(`${playertwoname.value}`, canvas.width / 2 + 150, 40);
-            ctx.closePath()
-        }
 
         //this funciton is use to show the final score board 
         function endCard() {
@@ -182,6 +142,28 @@ function entered() {
             ctx.lineTo(canvas.width / 2, canvas.height)
             ctx.strokeStyle = "white"
             ctx.stroke()
+            ctx.closePath()
+        }
+        //leftBatScore and rightBatChances merge into one function 
+        //it will indicate player two OR computer chances how much chance he have and Player one Score how much he got
+        function leftbatscoreandrightbatchancecommonthings(color, players, scorewidth, scoreHeight, playersName, namewidth, nameHeight) {
+            ctx.font = "30px Arial";
+            ctx.fillStyle = color;
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = "black";
+            ctx.fillText(`${players}`, scorewidth, scoreHeight);
+            ctx.fillText(`${playersName.value}`, namewidth, nameHeight);
+            ctx.closePath()
+        }
+
+        // leftbatchance and rightbatscore merge into one function 
+        // it will indicate player one chances how much chance he have and Player two or computer Score how much score he got
+        function leftbatchanceandrightbatscorecommonthings(color2, players2, width2, height2) {
+            ctx.font = "30px Arial";
+            ctx.fillStyle = color2;
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = "black";
+            ctx.fillText(`${players2}`, width2, height2)
             ctx.closePath()
         }
 
@@ -226,10 +208,14 @@ function entered() {
             ball()
             leftBat()
             middleLine()
-            leftBatScore()
-            rightBatScore()
-            rightBatChances()
-            leftBatChances()
+            // rightBatScore()
+            leftbatchanceandrightbatscorecommonthings("blue", playerOneScore, canvas.width / 2 + 30, 40) //right side paddle
+            leftbatchanceandrightbatscorecommonthings("green", playerTwoLoss, canvas.width / 2 - 100, 40) //left side paddle
+
+            leftbatscoreandrightbatchancecommonthings("green", playerTwoScore, canvas.width / 2 - 40, 40, playeronename, canvas.width / 2 - 250, 40)
+            leftbatscoreandrightbatchancecommonthings("blue", playerOneLoss, canvas.width / 2 + 80, 40, playertwoname, canvas.width / 2 + 150, 40)
+
+            // leftBatChances()
             rightbatmovementfunction()
             if (!playerandcomputerBot) { // If bot playerandcomputerBot true the bot will execute
                 if (pressedUp2)
